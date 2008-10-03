@@ -182,6 +182,8 @@ module ThoughtBot # :nodoc:
         # Example:
         #
         #   should_respond_with_content_type 'application/rss+xml'
+        #   should_respond_with_content_type :rss
+        #   should_respond_with_content_type /rss/
         def should_respond_with_content_type(content_type)
           should "respond with content type of #{content_type}" do
             content_type = Mime::EXTENSION_LOOKUP[content_type.to_s].to_s if content_type.is_a? Symbol
@@ -278,12 +280,15 @@ module ThoughtBot # :nodoc:
         #
         # Examples:
         #
-        #   should_route :get, '/posts', :action => :index
-        #   should_route :post, '/posts', :controller => :posts, :action => :create
-        #   should_route :get, '/posts/1', :action => :show, :id => 1
-        #   should_route :put, '/posts/1', :action => :update, :id => "1"
-        #   should_route :delete, '/posts/1', :action => :destroy, :id => 1
-        #   should_route :get, '/posts/new', :action => :new
+        #   should_route :get, "/posts", :controller => :posts, :action => :index
+        #   should_route :get, "/posts/new", :action => :new
+        #   should_route :post, "/posts", :action => :create
+        #   should_route :get, "/posts/1", :action => :show, :id => 1
+        #   should_route :edit, "/posts/1", :action => :show, :id => 1
+        #   should_route :put, "/posts/1", :action => :update, :id => 1
+        #   should_route :delete, "/posts/1", :action => :destroy, :id => 1
+        #   should_route :get, "/users/1/posts/1", 
+        #     :action => :show, :id => 1, :user_id => 1
         #
         def should_route(method, path, options)
           unless options[:controller]
