@@ -1,6 +1,9 @@
-* replaced implementation of should & context with jeremymcanally-context
-* re-organized lib to use "adapters" for different libs that get various shoulda macros. 
-* removed should_be_restful
-* removed ThoughtBot namespace
-* should_require_attributes renamed should_validate_presence_of (old name aliased)
+January 5th, 2008
+
+* added merge_block to test/test_helper, which was in shoulda lib in previous version.
 * should_require_unique_attributes renamed should_validate_uniqueness_of (old name aliased)
+* should_require_attributes renamed should_validate_presence_of (old name aliased)
+* removed ThoughtBot namespace
+* removed should_be_restful
+* re-organized lib to use "adapters" for different libs that get various shoulda macros. 
+* replaced implementation of should & context with jeremymcanally-context

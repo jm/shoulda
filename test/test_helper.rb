@@ -25,6 +25,10 @@ class Test::Unit::TestCase #:nodoc:
       Fixtures.create_fixtures(Test::Unit::TestCase.fixture_path, table_names)
     end
   end
+  
+  def self.merge_block(&blk)
+    blk.bind(self).call
+  end
 
   self.use_transactional_fixtures = false
   self.use_instantiated_fixtures  = false
