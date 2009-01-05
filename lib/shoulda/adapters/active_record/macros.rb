@@ -59,7 +59,7 @@ module Shoulda # :nodoc:
           klass = model_class
 
           attributes.each do |attribute|
-            should "require #{attribute} to be set" do
+            should "validate presence of #{attribute}" do
               assert_bad_value(klass, attribute, nil, message)
             end
           end
@@ -89,7 +89,7 @@ module Shoulda # :nodoc:
           klass = model_class
           attributes.each do |attribute|
             attribute = attribute.to_sym
-            should "require unique value for #{attribute}#{" scoped to #{scope.join(', ')}" unless scope.blank?}" do
+            should "validate uniquess of #{attribute}#{" scoped to #{scope.join(', ')}" unless scope.blank?}" do
               assert existing = klass.find(:first), "Can't find first #{klass}"
               object = klass.new
               existing_value = existing.send(attribute)

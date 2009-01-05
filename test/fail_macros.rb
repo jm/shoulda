@@ -20,7 +20,8 @@ class Test::Unit::TestCase
         Shoulda.expected_exceptions = nil
       end
     end
-    
+  end
+  
     # alias_method_chain hack to allow the should_fail macro to work
     def should_with_failure_scenario(name, &block)
       if Shoulda.expected_exceptions
@@ -31,5 +32,5 @@ class Test::Unit::TestCase
     end
     
     alias_method :should, :should_with_failure_scenario
-  end
+
 end
