@@ -1,6 +1,4 @@
 * context does not have should_eventually or before_should
-* should_require_attributes renamed should_validate_presence_of (old name aliased)
-* should_require_unique_attributes renamed should_validate_uniqueness_of (old name aliased)
 * before_should changes context's should method signature to take an options hash. Thus, I removed before_should for now.
 * sloccount is the "standard" line counter (http://gist.github.com/43250)
 * should_have_named_scope is not tested. user_test has commented out lines for it. there's a problem between its implementation and context
