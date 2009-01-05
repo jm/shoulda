@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class ProductTest < ActiveSupport::TestCase
+class ProductTest < Test::Unit::TestCase
   context "An intangible product" do
     setup do
       @product = Product.new(:tangible => false)

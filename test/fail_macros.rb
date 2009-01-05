@@ -29,6 +29,7 @@ class Test::Unit::TestCase
       end
       should_without_failure_scenario(name, &(failure_block || block))
     end
-    alias_method_chain :should, :failure_scenario
+    
+    alias_method :should, :should_with_failure_scenario
   end
 end

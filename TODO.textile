@@ -3,3 +3,4 @@
 * sloccount is the "standard" line counter (http://gist.github.com/43250)
 * should_have_named_scope is not tested. user_test has commented out lines for it. there's a problem between its implementation and context
 * should_change & should_not_change depend on before_should and thus are broken now. commented out tests in test/other/helpers_test.rb
+* get nice shoulda backtrace output back (ex. now test_eighteen_scope_itself_to_{_conditions=>{_age=>18}})
