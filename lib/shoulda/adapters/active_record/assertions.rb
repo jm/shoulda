@@ -1,5 +1,5 @@
-module ThoughtBot # :nodoc:
-  module Shoulda # :nodoc:
+module Shoulda # :nodoc:
+  module Adapters # :nodoc:
     module ActiveRecord # :nodoc:
       module Assertions
         # Asserts that the given object can be saved

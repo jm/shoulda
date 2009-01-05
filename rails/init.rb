@@ -1,1 +1,1 @@
-require 'shoulda/rails'
+require 'shoulda/adapters/rails'

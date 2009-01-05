@@ -1,6 +1,6 @@
-module ThoughtBot # :nodoc:
-  module Shoulda # :nodoc:
-    module Controller # :nodoc:
+module Shoulda # :nodoc:
+  module Adapters # :nodoc:
+    module ActionController # :nodoc:
       module Helpers # :nodoc:
         private # :enddoc:
 

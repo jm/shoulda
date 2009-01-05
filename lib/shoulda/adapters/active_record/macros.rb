@@ -1,5 +1,5 @@
-module ThoughtBot # :nodoc:
-  module Shoulda # :nodoc:
+module Shoulda # :nodoc:
+  module Adapters # :nodoc:
     module ActiveRecord # :nodoc:
       module MacroHelpers # :nodoc:
         # Helper method that determines the default error message used by Active
@@ -23,7 +23,7 @@ module ThoughtBot # :nodoc:
       # These helpers will test most of the validations and associations for your ActiveRecord models.
       #
       #   class UserTest < Test::Unit::TestCase
-      #     should_require_attributes :name, :phone_number
+      #     should_validate_presence_of :name, :phone_number
       #     should_not_allow_values_for :phone_number, "abcd", "1234"
       #     should_allow_values_for :phone_number, "(123) 456-7890"
       #
@@ -39,15 +39,7 @@ module ThoughtBot # :nodoc:
       #
       module Macros
         include MacroHelpers
-
-        # <b>DEPRECATED:</b> Use <tt>fixtures :all</tt> instead
-        #
-        # Loads all fixture files (<tt>test/fixtures/*.yml</tt>)
-        def load_all_fixtures
-          warn "[DEPRECATION] load_all_fixtures is deprecated.  Use `fixtures :all` instead."
-          fixtures :all
-        end
-
+        
         # Ensures that the model cannot be saved if one of the attributes listed is not present.
         #
         # If an instance variable has been created in the setup named after the
@@ -59,9 +51,9 @@ module ThoughtBot # :nodoc:
         #   Regexp or string.  Default = <tt>I18n.translate('activerecord.errors.messages.blank')</tt>
         #
         # Example:
-        #   should_require_attributes :name, :phone_number
+        #   should_validate_presence_of :name, :phone_number
         #
-        def should_require_attributes(*attributes)
+        def should_validate_presence_of(*attributes)
           message = get_options!(attributes, :message)
           message ||= default_error_message(:blank)
           klass = model_class
@@ -72,6 +64,8 @@ module ThoughtBot # :nodoc:
             end
           end
         end
+        
+        alias_method :should_require_attributes, :should_validate_presence_of 
 
         # Ensures that the model cannot be saved if one of the attributes listed is not unique.
         # Requires an existing record
@@ -82,12 +76,12 @@ module ThoughtBot # :nodoc:
         # * <tt>:scoped_to</tt> - field(s) to scope the uniqueness to.
         #
         # Examples:
-        #   should_require_unique_attributes :keyword, :username
-        #   should_require_unique_attributes :name, :message => "O NOES! SOMEONE STOELED YER NAME!"
-        #   should_require_unique_attributes :email, :scoped_to => :name
-        #   should_require_unique_attributes :address, :scoped_to => [:first_name, :last_name]
+        #   should_validate_uniqueness_of :keyword, :username
+        #   should_validate_uniqueness_of :name, :message => "O NOES! SOMEONE STOELED YER NAME!"
+        #   should_validate_uniqueness_of :email, :scoped_to => :name
+        #   should_validate_uniqueness_of :address, :scoped_to => [:first_name, :last_name]
         #
-        def should_require_unique_attributes(*attributes)
+        def should_validate_uniqueness_of(*attributes)
           message, scope = get_options!(attributes, :message, :scoped_to)
           scope = [*scope].compact
           message ||= default_error_message(:taken)
@@ -123,6 +117,8 @@ module ThoughtBot # :nodoc:
             end
           end
         end
+        
+        alias_method :should_require_unique_attributes, :should_validate_uniqueness_of
 
         # Ensures that the attribute cannot be set on mass update.
         #

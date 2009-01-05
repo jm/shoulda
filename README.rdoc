@@ -10,40 +10,7 @@ Assertions:: Many common rails testing idioms have been distilled into a set of 
 
 = Usage
 
-=== Context Helpers (ThoughtBot::Shoulda::Context)
-
-Stop killing your fingers with all of those underscores...  Name your tests with plain sentences!
-
-  class UserTest << Test::Unit::TestCase
-    context "A User instance" do
-      setup do
-        @user = User.find(:first)
-      end
-
-      should "return its full name" do
-        assert_equal 'John Doe', @user.full_name
-      end
-
-      context "with a profile" do
-        setup do
-          @user.profile = Profile.find(:first)
-        end
-
-        should "return true when sent #has_profile?" do
-          assert @user.has_profile?
-        end
-      end
-    end
-  end
-
-Produces the following test methods:
-
-  "test: A User instance should return its full name."
-  "test: A User instance with a profile should return true when sent #has_profile?."
-
-So readable!
-
-=== ActiveRecord Tests (ThoughtBot::Shoulda::ActiveRecord::Macros)
+=== ActiveRecord Tests (Shoulda::Adapters::ActiveRecord::Macros)
 
 Quick macro tests for your ActiveRecord associations and validations:
 
@@ -53,9 +20,9 @@ Quick macro tests for your ActiveRecord associations and validations:
     should_belong_to :user
     should_have_many :tags, :through => :taggings
 
-    should_require_unique_attributes :title
-    should_require_attributes :body, :message => /wtf/
-    should_require_attributes :title
+    should_validate_uniqueness_of :title
+    should_validate_presence_of :body, :message => /wtf/
+    should_validate_presence_of :title
     should_only_allow_numeric_values_for :user_id
   end
 
@@ -71,7 +38,7 @@ Quick macro tests for your ActiveRecord associations and validations:
 
 Makes TDD so much easier.
 
-=== Controller Tests (ThoughtBot::Shoulda::Controller::Macros)
+=== Controller Tests (Shoulda::Adapters::Controller::Macros)
 
 Macros to test the most common controller patterns...
 
@@ -90,7 +57,7 @@ Macros to test the most common controller patterns...
     end
   end
 
-=== Helpful Assertions (ThoughtBot::Shoulda::Assertions)
+=== Helpful Assertions (Shoulda::Adapters::Assertions)
 
 More to come here, but have fun with what's there.
 

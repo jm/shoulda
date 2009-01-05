@@ -2,7 +2,7 @@ require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
 require 'rake/gempackagetask'
-require 'lib/shoulda/context'
+require 'lib/shoulda'
 load 'tasks/shoulda.rake'
 
 # Test::Unit::UI::VERBOSE
@@ -38,7 +38,7 @@ task :default => ['test']
 
 spec = Gem::Specification.new do |s|
   s.name              = "shoulda"
-  s.version           = Thoughtbot::Shoulda::VERSION
+  s.version           = "2.0.6"
   s.summary           = "Making tests easy on the fingers and eyes"
   s.homepage          = "http://thoughtbot.com/projects/shoulda"
   s.rubyforge_project = "shoulda"
