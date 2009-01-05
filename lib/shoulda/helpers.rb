@@ -14,7 +14,12 @@ module Shoulda # :nodoc: all
     #
     #   class TestUser; model_class; end => User
     def model_class
-      self.name.gsub(/Test$/, '').constantize
+      parent_test = self
+      while parent_test.name.empty?
+        parent_test = parent_test.superclass
+      end
+
+      parent_test.name.gsub(/Test$/, '').constantize
     end
   end
 end
