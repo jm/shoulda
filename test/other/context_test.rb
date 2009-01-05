@@ -10,26 +10,26 @@ class ContextTest < Test::Unit::TestCase # :nodoc:
     end
   end
 
+  def setup
+    @super_blah = "aieee"
+  end
+
   context "context with setup block" do
     setup do
       @blah = "blah"
     end
     
-    should "run the setup block" do
+    should "run the context setup block" do
       assert_equal "blah", @blah
     end
-    
-    should "have name set right" do
-      assert_match(/^test: context with setup block/, self.to_s)
-    end
 
+    should "run the ContextTest setup" do
+      assert_equal "aieee", @super_blah
+    end
+    
     context "and a subcontext" do
       setup do
         @blah = "#{@blah} twice"
-      end
-      
-      should "be named correctly" do
-        assert_match(/^test: context with setup block and a subcontext should be named correctly/, self.to_s)
       end
       
       should "run the setup blocks in order" do
@@ -38,10 +38,6 @@ class ContextTest < Test::Unit::TestCase # :nodoc:
     end
 
     context_macro do
-      should "have name set right" do
-        assert_match(/^test: context with setup block with a subcontext made by a macro should have name set right/, self.to_s)
-      end
-
       should "run the setup block of that context macro" do
         assert_equal :foo, @context_macro
       end
@@ -60,10 +56,6 @@ class ContextTest < Test::Unit::TestCase # :nodoc:
     should "have @blah == 'foo'" do
       assert_equal "foo", @blah
     end
-
-    should "have name set right" do
-      assert_match(/^test: another context with setup block/, self.to_s)
-    end
   end
   
   context "context with method definition" do
@@ -75,9 +67,9 @@ class ContextTest < Test::Unit::TestCase # :nodoc:
       assert_equal "hi", hello
     end
 
-    should "have name set right" do
-      assert_match(/^test: context with method definition/, self.to_s)
-    end
+    #should "have name set right" do
+      #assert_match(/^test: context with method definition/, self.to_s)
+    #end
   end
   
   context "another context" do
