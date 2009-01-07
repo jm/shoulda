@@ -31,7 +31,9 @@ class Test::Unit::TestCase #:nodoc:
   end
 
   self.use_transactional_fixtures = false
-  self.use_instantiated_fixtures  = false
+  self.use_instantiated_fixtures  = false  
+  
+  setup_for_shoulda
 end
 
 require 'test/fail_macros'
